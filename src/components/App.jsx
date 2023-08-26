@@ -1,7 +1,11 @@
+import { GlobalStyle } from "GlobalStyle";
+import { Layuot } from "Layout";
+
 export const App = () => {
   return (
-    <div>
+    <Layuot>
       React homework template
-    </div>
+      <GlobalStyle/>
+    </Layuot>
   );
 };
