@@ -4,12 +4,14 @@ import { Component } from 'react';
 import { Contacts } from './Contscts/Contscts';
 import { InputName } from './Input/Input';
 import { nanoid } from 'nanoid';
+import { SearchField } from './SearchField/SearchField';
 
 export class App extends Component {
   state = {
     contacts: [],
     name: '',
     number: '',
+    searchContact: '',
   };
 
   handleNameChange = evt => {
@@ -20,19 +22,18 @@ export class App extends Component {
     this.setState({ number: evt.target.value });
   };
 
+  handleSearchChange = evt => {
+    this.setState({ searchContact: evt.target.value });
+  };
+
   handleAddContact = () => {
     const { contacts, name, number } = this.state;
 
-    if (
-      // Номер та ім'я не повинні бути порожні
-      name.trim() !== '' &&
-      number.trim() !== '' 
-    ) {
+    // Виправлено використання змінних
+    if (name.trim() !== '' && number.trim() !== '') {
       const existingContact = contacts.find(contact => contact.name === name);
 
-      // Якщо контак з таким іменем є, то
       if (existingContact) {
-        // Копіюємо масив контактів, замінюючи відповідний контакт
         const updatedContacts = contacts.map(contact =>
           contact.name === name
             ? { ...contact, numbers: [...contact.numbers, number] }
@@ -46,9 +47,9 @@ export class App extends Component {
         });
       } else {
         const newContact = {
-          id: nanoid(), // Генеруємо унікальний ID для нового контакту
+          id: nanoid(),
           name,
-          numbers: [number], // Кожний новий контакт має початковий номер
+          numbers: [number],
         };
 
         this.setState(prevState => ({
@@ -61,7 +62,12 @@ export class App extends Component {
   };
 
   render() {
-    const { contacts, name, number } = this.state;
+    const { contacts, name, number, searchContact } = this.state; // Оголошуємо searchContact тут
+
+    const filteredContacts = contacts.filter(contact =>
+      contact.name.toLowerCase().includes(searchContact.toLowerCase())
+    );
+
     return (
       <Layuot>
         <InputName
@@ -72,7 +78,8 @@ export class App extends Component {
           onAddContact={this.handleAddContact}
         />
 
-        <Contacts contactInfo={{ contacts }} />
+        <Contacts contactInfo={{ contacts: filteredContacts }} />
+        <SearchField value={searchContact} onChange={this.handleSearchChange} />
         <GlobalStyle />
       </Layuot>
     );
