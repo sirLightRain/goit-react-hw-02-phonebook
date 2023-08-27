@@ -6,7 +6,7 @@ export const MainWrapper = styled.div`
   gap: 24px;
 `;
 
-export const InpuWrapper = styled.div`
+export const InputWrapper = styled.div`
   width: 300px;
   padding: 16px;
   display: flex;

@@ -3,8 +3,10 @@ export const Contacts = ({ contactInfo: { contacts } }) => {
     <div>
       <h1>Contacts</h1>
       <ul>
-        {contacts.map((contact, index) => (
-          <li key={index}> - {contact}</li>
+        {contacts.map(contact => (
+          <li key={contact.id}>
+            {contact.name}: {contact.numbers.join(', ')}
+          </li>
         ))}
       </ul>
     </div>

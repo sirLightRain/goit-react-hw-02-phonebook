@@ -1,14 +1,20 @@
 import {
   MainWrapper,
-  InpuWrapper,
+  InputWrapper,
   Wrapper,
   InputLine,
   InputButton,
-} from './InputName.styled';
+} from './Input.styled';
 
-export const InputName = ({ name, onChange, onAddContact }) => {
+export const InputName = ({
+  name,
+  number,
+  onChangeName,
+  onChangeNumber,
+  onAddContact,
+}) => {
   const handleAddContact = () => {
-    if (name.trim() !== '') {
+    if (name.trim() !== '' && number.trim() !== '') {
       onAddContact(name);
     }
   };
@@ -16,7 +22,7 @@ export const InputName = ({ name, onChange, onAddContact }) => {
   return (
     <MainWrapper>
       <h1>Phonebook</h1>
-      <InpuWrapper>
+      <InputWrapper>
         <Wrapper>
           <p>Name</p>
           <InputLine
@@ -26,13 +32,23 @@ export const InputName = ({ name, onChange, onAddContact }) => {
             title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
             required
             value={name}
-            onChange={onChange}
+            onChange={onChangeName}
+          />
+          <p>Number</p>
+          <InputLine
+            type="tel"
+            name="number"
+            pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
+            title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
+            required
+            value={number}
+            onChange={onChangeNumber}
           />
         </Wrapper>
         <InputButton type="button" onClick={handleAddContact}>
           Add contact
         </InputButton>
-      </InpuWrapper>
+      </InputWrapper>
     </MainWrapper>
   );
 };
