@@ -7,8 +7,8 @@ export const Wrapper = styled.ul`
   padding: 16px;
   border-radius: 8px;
   width: 450px;
-  background-color: ${props => props.theme.colors.yellow};
-  outline: 2px solid black;
+
+
 `;
 
 export const ContactInfo = styled.li`
