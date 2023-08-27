@@ -1,14 +1,19 @@
-export const Contacts = ({ contactInfo: { contacts } }) => {
+import { Wrapper, ContactInfo, DeleteButton } from './Contscts.styled';
+
+export const Contacts = ({ contactInfo: { contacts }, onDeleteContact }) => {
   return (
     <div>
-      <h1>Contacts</h1>
-      <ul>
+
+      <Wrapper>
         {contacts.map(contact => (
-          <li key={contact.id}>
-            {contact.name}: {contact.numbers.join(', ')}
-          </li>
+          <ContactInfo key={contact.id}>
+            - {contact.name}: {contact.numbers.join(', ')}
+            <DeleteButton type="button" onClick={() => onDeleteContact(contact.id)}>
+              DELETE
+            </DeleteButton>
+          </ContactInfo>
         ))}
-      </ul>
+      </Wrapper>
     </div>
   );
 };

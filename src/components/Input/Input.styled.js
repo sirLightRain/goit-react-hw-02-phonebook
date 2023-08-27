@@ -44,7 +44,9 @@ export const InputButton = styled.button`
   background-color: ${props => props.theme.colors.lightGrey};
   cursor: pointer;
   &:focus,
-  &:hover {
+  &:hover,
+  &:active {
     background-color: ${props => props.theme.colors.blue};
   }
+
 `;

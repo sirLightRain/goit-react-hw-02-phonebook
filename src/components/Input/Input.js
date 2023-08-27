@@ -16,12 +16,14 @@ export const InputName = ({
   const handleAddContact = () => {
     if (name.trim() !== '' && number.trim() !== '') {
       onAddContact(name);
+      // Зняти фокус після кліку
+      document.activeElement.blur();
     }
   };
 
   return (
     <MainWrapper>
-      <h1>Phonebook</h1>
+
       <InputWrapper>
         <Wrapper>
           <p>Name</p>

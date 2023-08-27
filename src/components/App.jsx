@@ -26,6 +26,17 @@ export class App extends Component {
     this.setState({ searchContact: evt.target.value });
   };
 
+  handleDeleteContact = id => {
+
+    const updatedContacts = this.state.contacts.filter(
+      contact => contact.id !== id
+    );
+
+    this.setState({
+      contacts: updatedContacts,
+    });
+  };
+
   handleAddContact = () => {
     const { contacts, name, number } = this.state;
 
@@ -34,22 +45,13 @@ export class App extends Component {
       const existingContact = contacts.find(contact => contact.name === name);
 
       if (existingContact) {
-        const updatedContacts = contacts.map(contact =>
-          contact.name === name
-            ? { ...contact, numbers: [...contact.numbers, number] }
-            : contact
-        );
-
-        this.setState({
-          contacts: updatedContacts,
-          name: '',
-          number: '',
-        });
+        // Перевіряємо чи ім'я дублюється і виводимо алерт
+        alert(`Контакт з іменем "${name}" вже існує. Введіть інше ім'я.`);
       } else {
         const newContact = {
           id: nanoid(),
           name,
-          numbers: [number],
+          numbers: [number], // Початковий номер
         };
 
         this.setState(prevState => ({
@@ -70,6 +72,7 @@ export class App extends Component {
 
     return (
       <Layuot>
+        <h1>Phonebook</h1>
         <InputName
           name={name}
           number={number}
@@ -77,9 +80,12 @@ export class App extends Component {
           onChangeNumber={this.handleNumberChange}
           onAddContact={this.handleAddContact}
         />
-
-        <Contacts contactInfo={{ contacts: filteredContacts }} />
         <SearchField value={searchContact} onChange={this.handleSearchChange} />
+        <h1>Contacts</h1>
+        <Contacts
+          contactInfo={{ contacts: filteredContacts }}
+          onDeleteContact={this.handleDeleteContact}
+        />
         <GlobalStyle />
       </Layuot>
     );
