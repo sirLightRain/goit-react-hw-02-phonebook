@@ -23,7 +23,6 @@ export const InputName = ({
 
   return (
     <MainWrapper>
-
       <InputWrapper>
         <Wrapper>
           <p>Name</p>
@@ -47,7 +46,7 @@ export const InputName = ({
             onChange={onChangeNumber}
           />
         </Wrapper>
-        <InputButton type="button" onClick={handleAddContact}>
+        <InputButton type="submit" onClick={handleAddContact}>
           Add contact
         </InputButton>
       </InputWrapper>

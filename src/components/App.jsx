@@ -27,7 +27,6 @@ export class App extends Component {
   };
 
   handleDeleteContact = id => {
-
     const updatedContacts = this.state.contacts.filter(
       contact => contact.id !== id
     );
@@ -38,11 +37,12 @@ export class App extends Component {
   };
 
   handleAddContact = () => {
+
     const { contacts, name, number } = this.state;
 
-    // Виправлено використання змінних
     if (name.trim() !== '' && number.trim() !== '') {
-      const existingContact = contacts.find(contact => contact.name === name);
+      const existingContact = contacts.find(contact => contact.name.toLowerCase() === name.toLowerCase()
+      );
 
       if (existingContact) {
         // Перевіряємо чи ім'я дублюється і виводимо алерт
@@ -64,7 +64,7 @@ export class App extends Component {
   };
 
   render() {
-    const { contacts, name, number, searchContact } = this.state; // Оголошуємо searchContact тут
+    const { contacts, name, number, searchContact } = this.state; 
 
     const filteredContacts = contacts.filter(contact =>
       contact.name.toLowerCase().includes(searchContact.toLowerCase())
