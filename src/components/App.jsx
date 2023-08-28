@@ -9,8 +9,7 @@ import { SearchField } from './SearchField/SearchField';
 export class App extends Component {
   state = {
     contacts: [],
-    name: '',
-    number: '',
+
     searchContact: '',
   };
 
